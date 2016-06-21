@@ -7,6 +7,7 @@ Vagrant.configure("2") do |config|
     box.vm.box = "ubuntu/trusty64"
     box.vm.network :private_network, ip: "172.17.0.200", :netmask => "255.255.0.0"
     box.vm.synced_folder "salt/roots/", "/srv/salt"
+    box.vm.network "forwarded_port", guest: 80, host: 8080
     box.vm.provision :salt do |salt|
       salt.masterless = true
       salt.minion_config = "salt/minion.conf"
